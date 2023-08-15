@@ -1,0 +1,33 @@
+import random
+
+class MallVirtualAssistant:
+    def __init__(self):
+        self.products = {
+            "123": "Shoes",
+            "456": "Clothing",
+            "789": "Electronics",
+            # Add more products and their codes
+        }
+        
+    def respond(self, user_input):
+        if "locate" in user_input and any(code in user_input for code in self.products):
+            product_codes = [code for code in self.products if code in user_input]
+            products_to_locate = [self.products[code] for code in product_codes]
+            response = f"I can help you locate the following products: {', '.join(products_to_locate)}"
+        else:
+            response = "I'm sorry, I couldn't understand your request. Please try again."
+        return response
+
+def main():
+    assistant = MallVirtualAssistant()
+    print("Welcome to Mall Virtual Assistant!")
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() == "exit":
+            print("Goodbye!")
+            break
+        response = assistant.respond(user_input)
+        print("Assistant:", response)
+
+if __name__ == "__main__":
+    main()
